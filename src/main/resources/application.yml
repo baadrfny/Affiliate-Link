@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: affiliate-link
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/affiliate_link_db
+    username: badr
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  flyway:
+    enabled: true

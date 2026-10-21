@@ -1,9 +1,15 @@
 services:
-  postgres:
-    image: 'postgres:latest'
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: affiliate-postgres
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      POSTGRES_DB: affiliate_link_db
+      POSTGRES_USER: badr
+      POSTGRES_PASSWORD: admin123
     ports:
-      - '5432'
+      - "5433:5432"
+    volumes:
+      - affiliate_data:/var/lib/postgresql/data
+
+volumes:
+  affiliate_data:
