@@ -1,36 +1,69 @@
 package com.affiliateLink.profile.service;
 
+import com.affiliateLink.common.EmailAlreadyExistsException;
+import com.affiliateLink.common.ResourceNotFoundException;
+import com.affiliateLink.profile.dto.PublisherRequest;
+import com.affiliateLink.profile.dto.PublisherResponse;
 import com.affiliateLink.profile.entity.Publisher;
+import com.affiliateLink.profile.repository.ProfileRepository;
 import com.affiliateLink.profile.repository.PublisherRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
 public class PublisherService {
 
     private final PublisherRepository publisherRepository;
+    private final ProfileRepository profileRepository;
 
-
-
-    public PublisherService(PublisherRepository publisherRepository){
+    public PublisherService(
+            PublisherRepository publisherRepository,
+            ProfileRepository profileRepository) {
         this.publisherRepository = publisherRepository;
+        this.profileRepository = profileRepository;
     }
 
-    public Publisher createPublisher(Publisher publisher){
-        return publisherRepository.save(publisher);
+    public PublisherResponse createPublisher(PublisherRequest request) {
+
+        if (profileRepository.existsByEmail(request.email())) {
+            throw new EmailAlreadyExistsException("Email already exists");
+        }
+
+        Publisher publisher = new Publisher();
+
+        publisher.setFirstName(request.firstName());
+        publisher.setLastName(request.lastName());
+        publisher.setEmail(request.email());
+        publisher.setNiche(request.niche());
+        publisher.setBio(request.bio());
+        publisher.setCountry(request.country());
+
+        Publisher savedPublisher = publisherRepository.save(publisher);
+
+        return new PublisherResponse(
+                savedPublisher.getId(),
+                savedPublisher.getFirstName(),
+                savedPublisher.getLastName(),
+                savedPublisher.getEmail(),
+                savedPublisher.getStatu(),
+                savedPublisher.getNiche(),
+                savedPublisher.getBio(),
+                savedPublisher.getCountry(),
+                savedPublisher.getCreatedAt()
+        );
     }
 
-
-    public Optional<Publisher> getPublisherById(Long id){
-        return publisherRepository.findById(id);
+    public Publisher getPublisherById(Long id) {
+        return publisherRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Publisher not found with id: " + id
+                        )
+                );
     }
 
-    public List<Publisher> getAllPublisher(){
+    public List<Publisher> getAllPublisher() {
         return publisherRepository.findAll();
     }
-
-
 }
