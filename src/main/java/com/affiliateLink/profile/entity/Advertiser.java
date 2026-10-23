@@ -4,7 +4,14 @@ package com.affiliateLink.profile.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "profile_advertisers")
 public class Advertiser extends Profile {
@@ -18,6 +25,9 @@ public class Advertiser extends Profile {
 
     @Column(name = "website" , nullable = true , length = 255)
     private String website;
+
+
+
 
 
 }
