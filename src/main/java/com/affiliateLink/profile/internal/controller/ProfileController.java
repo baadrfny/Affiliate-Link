@@ -1,8 +1,8 @@
-package com.affiliateLink.profile.controller;
+package com.affiliateLink.profile.internal.controller;
 
-import com.affiliateLink.profile.dto.ChangeProfileStatusRequest;
-import com.affiliateLink.profile.entity.Profile;
-import com.affiliateLink.profile.service.ProfileService;
+import com.affiliateLink.profile.internal.dto.ChangeProfileStatusRequest;
+import com.affiliateLink.profile.internal.entity.Profile;
+import com.affiliateLink.profile.internal.service.ProfileService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

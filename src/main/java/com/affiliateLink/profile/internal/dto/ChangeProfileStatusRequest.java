@@ -1,6 +1,6 @@
-package com.affiliateLink.profile.dto;
+package com.affiliateLink.profile.internal.dto;
 
-import com.affiliateLink.profile.entity.enumStatus.status;
+import com.affiliateLink.profile.internal.entity.enumStatus.status;
 import jakarta.validation.constraints.NotNull;
 
 public class ChangeProfileStatusRequest {

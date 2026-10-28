@@ -1,6 +1,6 @@
-package com.affiliateLink.profile.entity;
+package com.affiliateLink.profile.internal.entity;
 
-import com.affiliateLink.profile.entity.enumStatus.status;
+import com.affiliateLink.profile.internal.entity.enumStatus.status;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

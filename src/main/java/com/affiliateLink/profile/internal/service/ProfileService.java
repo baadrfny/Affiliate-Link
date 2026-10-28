@@ -1,11 +1,11 @@
-package com.affiliateLink.profile.service;
+package com.affiliateLink.profile.internal.service;
 
 
 import com.affiliateLink.common.ResourceNotFoundException;
-import com.affiliateLink.profile.entity.Profile;
-import com.affiliateLink.profile.repository.ProfileRepository;
+import com.affiliateLink.profile.internal.entity.Profile;
+import com.affiliateLink.profile.internal.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
-import com.affiliateLink.profile.entity.enumStatus.status;
+import com.affiliateLink.profile.internal.entity.enumStatus.status;
 
 @Service
 public class ProfileService {

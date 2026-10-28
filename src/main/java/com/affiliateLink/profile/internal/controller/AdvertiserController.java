@@ -1,9 +1,9 @@
-package com.affiliateLink.profile.controller;
+package com.affiliateLink.profile.internal.controller;
 
-import com.affiliateLink.profile.dto.AdvertiserRequest;
-import com.affiliateLink.profile.dto.AdvertiserResponse;
-import com.affiliateLink.profile.entity.Advertiser;
-import com.affiliateLink.profile.service.AdvertiserService;
+import com.affiliateLink.profile.internal.dto.AdvertiserRequest;
+import com.affiliateLink.profile.internal.dto.AdvertiserResponse;
+import com.affiliateLink.profile.internal.entity.Advertiser;
+import com.affiliateLink.profile.internal.service.AdvertiserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

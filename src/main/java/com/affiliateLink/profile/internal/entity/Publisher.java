@@ -1,7 +1,7 @@
-package com.affiliateLink.profile.entity;
+package com.affiliateLink.profile.internal.entity;
 
 
-import com.affiliateLink.profile.entity.enumStatus.Niche;
+import com.affiliateLink.profile.internal.entity.enumStatus.Niche;
 import jakarta.persistence.*;
 
 

@@ -1,12 +1,12 @@
-package com.affiliateLink.profile.service;
+package com.affiliateLink.profile.internal.service;
 
 import com.affiliateLink.common.EmailAlreadyExistsException;
 import com.affiliateLink.common.ResourceNotFoundException;
-import com.affiliateLink.profile.dto.PublisherRequest;
-import com.affiliateLink.profile.dto.PublisherResponse;
-import com.affiliateLink.profile.entity.Publisher;
-import com.affiliateLink.profile.repository.ProfileRepository;
-import com.affiliateLink.profile.repository.PublisherRepository;
+import com.affiliateLink.profile.internal.dto.PublisherRequest;
+import com.affiliateLink.profile.internal.dto.PublisherResponse;
+import com.affiliateLink.profile.internal.entity.Publisher;
+import com.affiliateLink.profile.internal.repository.ProfileRepository;
+import com.affiliateLink.profile.internal.repository.PublisherRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

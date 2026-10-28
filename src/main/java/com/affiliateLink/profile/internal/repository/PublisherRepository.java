@@ -1,6 +1,6 @@
-package com.affiliateLink.profile.repository;
+package com.affiliateLink.profile.internal.repository;
 
-import com.affiliateLink.profile.entity.Publisher;
+import com.affiliateLink.profile.internal.entity.Publisher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

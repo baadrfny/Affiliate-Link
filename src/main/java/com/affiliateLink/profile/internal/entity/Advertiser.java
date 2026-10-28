@@ -1,4 +1,4 @@
-package com.affiliateLink.profile.entity;
+package com.affiliateLink.profile.internal.entity;
 
 
 import jakarta.persistence.Column;

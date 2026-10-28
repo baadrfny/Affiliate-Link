@@ -1,9 +1,9 @@
-package com.affiliateLink.profile.controller;
+package com.affiliateLink.profile.internal.controller;
 
-import com.affiliateLink.profile.dto.PublisherRequest;
-import com.affiliateLink.profile.dto.PublisherResponse;
-import com.affiliateLink.profile.entity.Publisher;
-import com.affiliateLink.profile.service.PublisherService;
+import com.affiliateLink.profile.internal.dto.PublisherRequest;
+import com.affiliateLink.profile.internal.dto.PublisherResponse;
+import com.affiliateLink.profile.internal.entity.Publisher;
+import com.affiliateLink.profile.internal.service.PublisherService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
