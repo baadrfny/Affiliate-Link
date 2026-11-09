@@ -1,6 +1,6 @@
 package com.affiliateLink.offer.service;
 
-import com.affiliateLink.profile.ProfileSuspended;
+import com.affiliateLink.profile.api.ProfileSuspended;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.modulith.events.ApplicationModuleListener;

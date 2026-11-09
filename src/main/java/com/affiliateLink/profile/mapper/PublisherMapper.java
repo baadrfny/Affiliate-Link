@@ -1,9 +1,9 @@
 package com.affiliateLink.profile.mapper;
 
-import com.affiliateLink.profile.PublisherContact;
-import com.affiliateLink.profile.dto.PublisherRequest;
-import com.affiliateLink.profile.dto.PublisherResponse;
-import com.affiliateLink.profile.entity.Publisher;
+import com.affiliateLink.profile.api.PublisherContact;
+import com.affiliateLink.profile.internal.dto.PublisherRequest;
+import com.affiliateLink.profile.internal.dto.PublisherResponse;
+import com.affiliateLink.profile.internal.entity.Publisher;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

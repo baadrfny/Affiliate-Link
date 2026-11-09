@@ -1,8 +1,8 @@
 package com.affiliateLink.profile.mapper;
 
-import com.affiliateLink.profile.dto.AdvertiserRequest;
-import com.affiliateLink.profile.dto.AdvertiserResponse;
-import com.affiliateLink.profile.entity.Advertiser;
+import com.affiliateLink.profile.internal.dto.AdvertiserRequest;
+import com.affiliateLink.profile.internal.dto.AdvertiserResponse;
+import com.affiliateLink.profile.internal.entity.Advertiser;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

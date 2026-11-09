@@ -2,7 +2,7 @@ package com.affiliateLink.offer.service;
 
 import com.affiliateLink.common.ConflictException;
 import com.affiliateLink.common.ResourceNotFoundException;
-import com.affiliateLink.profile.ProfileApi;
+import com.affiliateLink.profile.api.ProfileApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

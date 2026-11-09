@@ -1,7 +1,7 @@
 package com.affiliateLink.offer.service;
 
-import com.affiliateLink.profile.ProfileApi;
-import com.affiliateLink.profile.PublisherContact;
+import com.affiliateLink.profile.api.ProfileApi;
+import com.affiliateLink.profile.api.PublisherContact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.MailException;
