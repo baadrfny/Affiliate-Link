@@ -5,61 +5,57 @@ import com.affiliateLink.common.ResourceNotFoundException;
 import com.affiliateLink.profile.dto.AdvertiserRequest;
 import com.affiliateLink.profile.dto.AdvertiserResponse;
 import com.affiliateLink.profile.entity.Advertiser;
+import com.affiliateLink.profile.mapper.AdvertiserMapper;
 import com.affiliateLink.profile.repository.AdvertiserRepository;
 import com.affiliateLink.profile.repository.ProfileRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class AdvertiserService {
+
+    private static final Logger log = LoggerFactory.getLogger(AdvertiserService.class);
 
     private final AdvertiserRepository advertiserRepository;
     private final ProfileRepository profileRepository;
+    private final AdvertiserMapper advertiserMapper;
 
-    public AdvertiserService(
-            AdvertiserRepository advertiserRepository,
-            ProfileRepository profileRepository) {
+    public AdvertiserService(AdvertiserRepository advertiserRepository,
+                             ProfileRepository profileRepository,
+                             AdvertiserMapper advertiserMapper) {
         this.advertiserRepository = advertiserRepository;
         this.profileRepository = profileRepository;
+        this.advertiserMapper = advertiserMapper;
     }
 
+    @Transactional
     public AdvertiserResponse createAdvertiser(AdvertiserRequest request) {
 
         if (profileRepository.existsByEmail(request.email())) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
 
-        Advertiser advertiser = new Advertiser();
+        Advertiser saved = advertiserRepository.save(advertiserMapper.toEntity(request));
+        log.info("Advertiser created: id={}", saved.getId());
 
-        advertiser.setEmail(request.email());
-        advertiser.setCompanyName(request.companyName());
-        advertiser.setSector(request.sector());
-        advertiser.setWebsite(request.website());
-
-        Advertiser savedAdvertiser = advertiserRepository.save(advertiser);
-
-        return new AdvertiserResponse(
-                savedAdvertiser.getId(),
-                savedAdvertiser.getCompanyName(),
-                savedAdvertiser.getSector(),
-                savedAdvertiser.getEmail(),
-                savedAdvertiser.getStatu(),
-                savedAdvertiser.getWebsite(),
-                savedAdvertiser.getCreatedAt()
-        );
+        return advertiserMapper.toResponse(saved);
     }
 
-    public Advertiser getAdvertiserById(Long id) {
-        return advertiserRepository.findById(id)
+    public AdvertiserResponse getAdvertiserById(Long id) {
+        log.debug("Reading advertiser {}", id);
+        Advertiser advertiser = advertiserRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Advertiser not found with id: " + id
-                        )
-                );
+                        new ResourceNotFoundException("Advertiser not found with id: " + id));
+        return advertiserMapper.toResponse(advertiser);
     }
 
-    public List<Advertiser> getAllAdvertisers() {
-        return advertiserRepository.findAll();
+    public List<AdvertiserResponse> getAllAdvertisers() {
+        log.debug("Reading all advertisers");
+        return advertiserMapper.toResponses(advertiserRepository.findAll());
     }
 }

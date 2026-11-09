@@ -5,65 +5,57 @@ import com.affiliateLink.common.ResourceNotFoundException;
 import com.affiliateLink.profile.dto.PublisherRequest;
 import com.affiliateLink.profile.dto.PublisherResponse;
 import com.affiliateLink.profile.entity.Publisher;
+import com.affiliateLink.profile.mapper.PublisherMapper;
 import com.affiliateLink.profile.repository.ProfileRepository;
 import com.affiliateLink.profile.repository.PublisherRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class PublisherService {
+
+    private static final Logger log = LoggerFactory.getLogger(PublisherService.class);
 
     private final PublisherRepository publisherRepository;
     private final ProfileRepository profileRepository;
+    private final PublisherMapper publisherMapper;
 
-    public PublisherService(
-            PublisherRepository publisherRepository,
-            ProfileRepository profileRepository) {
+    public PublisherService(PublisherRepository publisherRepository,
+                            ProfileRepository profileRepository,
+                            PublisherMapper publisherMapper) {
         this.publisherRepository = publisherRepository;
         this.profileRepository = profileRepository;
+        this.publisherMapper = publisherMapper;
     }
 
+    @Transactional
     public PublisherResponse createPublisher(PublisherRequest request) {
 
         if (profileRepository.existsByEmail(request.email())) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
 
-        Publisher publisher = new Publisher();
+        Publisher saved = publisherRepository.save(publisherMapper.toEntity(request));
+        log.info("Publisher created: id={}", saved.getId());
 
-        publisher.setFirstName(request.firstName());
-        publisher.setLastName(request.lastName());
-        publisher.setEmail(request.email());
-        publisher.setNiche(request.niche());
-        publisher.setBio(request.bio());
-        publisher.setCountry(request.country());
-
-        Publisher savedPublisher = publisherRepository.save(publisher);
-
-        return new PublisherResponse(
-                savedPublisher.getId(),
-                savedPublisher.getFirstName(),
-                savedPublisher.getLastName(),
-                savedPublisher.getEmail(),
-                savedPublisher.getStatu(),
-                savedPublisher.getNiche(),
-                savedPublisher.getBio(),
-                savedPublisher.getCountry(),
-                savedPublisher.getCreatedAt()
-        );
+        return publisherMapper.toResponse(saved);
     }
 
-    public Publisher getPublisherById(Long id) {
-        return publisherRepository.findById(id)
+    public PublisherResponse getPublisherById(Long id) {
+        log.debug("Reading publisher {}", id);
+        Publisher publisher = publisherRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Publisher not found with id: " + id
-                        )
-                );
+                        new ResourceNotFoundException("Publisher not found with id: " + id));
+        return publisherMapper.toResponse(publisher);
     }
 
-    public List<Publisher> getAllPublisher() {
-        return publisherRepository.findAll();
+    public List<PublisherResponse> getAllPublisher() {
+        log.debug("Reading all publishers");
+        return publisherMapper.toResponses(publisherRepository.findAll());
     }
 }

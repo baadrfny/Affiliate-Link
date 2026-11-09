@@ -1,0 +1,26 @@
+package com.affiliateLink.profile.mapper;
+
+import com.affiliateLink.profile.PublisherContact;
+import com.affiliateLink.profile.dto.PublisherRequest;
+import com.affiliateLink.profile.dto.PublisherResponse;
+import com.affiliateLink.profile.entity.Publisher;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+import java.util.List;
+
+@Mapper(componentModel = "spring")
+public interface PublisherMapper {
+
+    @Mapping(target = "statu", ignore = true)
+    Publisher toEntity(PublisherRequest request);
+
+    PublisherResponse toResponse(Publisher publisher);
+
+    List<PublisherResponse> toResponses(List<Publisher> publishers);
+
+    // used by ProfileApi (public API of the module)
+    PublisherContact toContact(Publisher publisher);
+
+    List<PublisherContact> toContacts(List<Publisher> publishers);
+}
