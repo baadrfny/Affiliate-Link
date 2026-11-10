@@ -42,4 +42,6 @@ public class PublisherTest {
         assertThat(publisher.getCreatedAt()).isNotNull();
         assertThat(publisher.getStatu()).isEqualTo(status.PENDING);
     }
+
+
 }
