@@ -27,6 +27,15 @@
 		<java.version>17</java.version>
 		<spring-modulith.version>2.1.1</spring-modulith.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
+
+		<sonar.projectKey>Test-AffiliateLinko</sonar.projectKey>
+		<sonar.projectName>AffiliateLinko</sonar.projectName>
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
+		<sonar.coverage.jacoco.xmlReportPaths>
+			target/site/jacoco/jacoco.xml
+		</sonar.coverage.jacoco.xmlReportPaths>
+
+
 	</properties>
 
 	<!-- ================= DEPENDENCY MANAGEMENT ================= -->
@@ -357,6 +366,14 @@
 					</execution>
 
 				</executions>
+			</plugin>
+
+
+
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>5.2.0.4988</version>
 			</plugin>
 
 		</plugins>
